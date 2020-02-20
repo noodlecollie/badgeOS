@@ -1,31 +1,82 @@
 #include "heltec.h"
-#include "src/test/test.h"
-
-volatile bool InterruptState = false;
-
-static void buttonInterrupt()
-{
-	InterruptState = !InterruptState;
-}
+#include "TimeAlarms.h"
+#include "src/InputEventSystem/Interrupts.h"
 
 void setup()
 {
-	pinMode(LED,OUTPUT);
-	digitalWrite(LED,HIGH);
+	pinMode(LED, OUTPUT);
+	digitalWrite(LED, LOW);
 
-	pinMode(KEY_BUILTIN, INPUT_PULLUP);
-	attachInterrupt(digitalPinToInterrupt(KEY_BUILTIN), buttonInterrupt, CHANGE);
+	BadgeOS::InputInterrupts::initialise();
 
 	Heltec.begin(true /*DisplayEnable Enable*/, false /*LoRa Enable*/, true /*Serial Enable*/);
 }
 
 void loop()
 {
-	digitalWrite(LED,HIGH);
-	Test(InterruptState ? "LED high (*)" : "LED high");
-	delay(2000);
+	using namespace BadgeOS;
 
-	digitalWrite(LED,LOW);
-	Test(InterruptState ? "LED low (*)" : "LED low");
-	delay(2000);
+	//InterruptInputState state = InputInterrupts::getInputState();
+	InputInterrupts::update();
+
+	Heltec.display->clear();
+
+	if ( /*state.hasInput()*/ InputInterrupts::hasNewInputEvent() )
+	{
+		const char* deviceName = "UNKNOWN";
+		const char* actionName = "UNKNOWN";
+
+		switch ( InputInterrupts::inputDevice() )
+		{
+			case Input::Device::Button0:
+			{
+				deviceName = "Button0";
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
+		}
+
+		switch ( InputInterrupts::inputAction() )
+		{
+			case Input::Action::Pressed:
+			{
+				actionName = "Pressed";
+				break;
+			}
+
+			case Input::Action::Released:
+			{
+				actionName = "Released";
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
+		}
+
+		String output;
+		output += "Input received: ";
+		output += deviceName;
+		output += " in state ";
+		output += actionName;
+		output += ".";
+
+		Heltec.display->drawStringMaxWidth(0, 0, 128, output);
+		digitalWrite(LED, HIGH);
+	}
+	else
+	{
+		Heltec.display->drawString(0, 0, "No inputs detected.");
+		digitalWrite(LED, LOW);
+	}
+
+	Heltec.display->display();
+
+	Alarm.delay(1000/25);
 }
