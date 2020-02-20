@@ -1,5 +1,5 @@
 #include "heltec.h"
-#include "test.h"
+#include "src/test/test.h"
 
 volatile bool InterruptState = false;
 
