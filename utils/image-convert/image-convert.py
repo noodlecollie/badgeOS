@@ -7,7 +7,7 @@ from PIL import Image
 # The Heltec OLED binary image format is row-major, where the Y position of each column increases as
 # you go from the LSB to the MSB of each byte. If the Y dimension of the image is not a multiple of
 # 8, the rest of the byte after the last pixel in the column is treated as padding and is ignored.
-# For a WxH image, there are W columns of ceil(Y/8) bytes laid out sequentially in memory.
+# For a WxH image, there are W columns of ceil(H/8) bytes laid out sequentially in memory.
 
 def parseArgs():
 	parser = argparse.ArgumentParser("image-convert",
