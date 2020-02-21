@@ -1,7 +1,7 @@
 #pragma once
 
 #include <functional>
-#include "ScreenIds.h"
+#include "ScreenDefs.h"
 
 namespace BadgeOS
 {

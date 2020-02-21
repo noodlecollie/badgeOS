@@ -4,7 +4,7 @@
 #include <cstdint>
 
 #include "../CoreUtil/Singleton.h"
-#include "ScreenIds.h"
+#include "ScreenDefs.h"
 
 namespace BadgeOS
 {

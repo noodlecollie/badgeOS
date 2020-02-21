@@ -1,5 +1,5 @@
 #include "InputDebugScreen.h"
-#include "../ScreenIds.h"
+#include "../ScreenDefs.h"
 #include "heltec.h"
 #include "../../InputEventSystem/InputDefs.h"
 
@@ -16,6 +16,6 @@ namespace BadgeOS
 
 	void InputDebugScreen::handleInputEvent(const Input::Event& event)
 	{
-		Serial.printf("Received input event: %x, %x, %lx\n", (uint32_t)event.device, (uint32_t)event.action, event.timestamp);
+		Serial.printf("Received input event: %x, %x, %lx\r\n", (uint32_t)event.device, (uint32_t)event.action, event.timestamp);
 	}
 }

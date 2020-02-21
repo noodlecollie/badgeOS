@@ -11,5 +11,7 @@ namespace BadgeOS
 			Screen_Count,
 			Screen_Invalid = -1
 		};
+
+		void initialiseScreens();
 	}
 }
