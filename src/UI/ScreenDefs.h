@@ -12,6 +12,13 @@ namespace BadgeOS
 			Screen_Invalid = -1
 		};
 
+		enum class UpdateResponse
+		{
+			NoRender,
+			Render,
+			ClearAndRender
+		};
+
 		void initialiseScreens();
 	}
 }

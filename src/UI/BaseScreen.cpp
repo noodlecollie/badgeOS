@@ -17,9 +17,27 @@ namespace BadgeOS
 
 	void BaseScreen::handleInputEvent(const Input::Event& event)
 	{
-		if ( m_InputEventHandler )
+		if ( m_InputEventCallback )
 		{
-			m_InputEventHandler(event);
+			m_InputEventCallback(event);
+		}
+	}
+
+	Screen::UpdateResponse BaseScreen::update(TimevalMs frameTime)
+	{
+		if ( m_UpdateCallback )
+		{
+			return m_UpdateCallback(frameTime);
+		}
+
+		return Screen::UpdateResponse::NoRender;
+	}
+
+	void BaseScreen::render()
+	{
+		if ( m_RenderCallback )
+		{
+			m_RenderCallback();
 		}
 	}
 }

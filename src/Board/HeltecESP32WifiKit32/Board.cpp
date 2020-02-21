@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "heltec.h"
+#include "ESP.h"
 
 namespace BadgeOS
 {
@@ -34,6 +35,16 @@ namespace BadgeOS
 			initialiseOLED();
 
 			Serial.println("*** Hardware board initialised. ***");
+		}
+
+		void reset()
+		{
+			ESP.restart();
+
+			while ( true )
+			{
+				// Trap here.
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "Assert.h"
+#include "../Board/HeltecESP32WifiKit32/Board.h"
 
 #define ASSERT_LED_ITERATIONS_PER_FLASH 2
 #define ASSERT_LED_FLASHES_PER_SEC 8
@@ -26,9 +27,13 @@ namespace BadgeOS
 
 			for ( int iteration = 0; ASSERT_LED_FLASH_COND(iteration); ++iteration )
 			{
+				ledOn = !ledOn;
 				digitalWrite(LED, ledOn ? HIGH : LOW);
+
 				delay(1000 / ASSERT_LED_ITERATIONS_PER_SEC);
 			}
+
+			HeltecESP32WifiKit32::reset();
 		}
 	}
 }

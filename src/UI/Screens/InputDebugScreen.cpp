@@ -8,9 +8,9 @@
 namespace BadgeOS
 {
 	InputDebugScreen::InputDebugScreen() :
-		BaseScreen(Screen::Screen_InputDebug)
+		BaseScreen(Screen::/*Screen_InputDebug*/Screen_Invalid)
 	{
-		m_InputEventHandler = [this](const Input::Event& event)
+		m_InputEventCallback = [this](const Input::Event& event)
 		{
 			handleInputEvent(event);
 		};
