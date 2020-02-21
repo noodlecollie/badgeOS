@@ -29,7 +29,6 @@ namespace BadgeOS
 			digitalWrite(LED, LOW);
 
 			pinMode(KEY_BUILTIN, INPUT_PULLUP);
-			digitalWrite(KEY_BUILTIN, LOW);
 
 			initialiseSerial();
 			initialiseOLED();

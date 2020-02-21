@@ -49,7 +49,7 @@ namespace BadgeOS
 
 		// If the new input event is a different device and the last input event was not a release,
 		// create a release event for the last device first.
-		if ( newDevice != lastEvent.device && lastEvent.action != Input::Action::Released )
+		if ( lastEvent.device != Input::Device::None && newDevice != lastEvent.device && lastEvent.action != Input::Action::Released )
 		{
 			m_CurrentEvent.device = lastEvent.device;
 			m_CurrentEvent.action = Input::Action::Released;

@@ -28,13 +28,9 @@ namespace BadgeOS
 
 		void buttonPrgISR()
 		{
-			static volatile bool pressedState = false;
-
-			pressedState = !pressedState;
-
 			resetISREventState();
 			setISREventDevice(Input::Device::Button0);
-			setISREventAction(pressedState ? Input::Action::Pressed : Input::Action::Released);
+			setISREventAction(digitalRead(KEY_BUILTIN) == LOW ? Input::Action::Pressed : Input::Action::Released);
 		}
 
 		void initialise()

@@ -3,6 +3,8 @@
 #include "heltec.h"
 #include "../../InputEventSystem/InputDefs.h"
 
+#define SERIAL_PRINTF(...) Serial.printf("InputDebugScreen: " __VA_ARGS__)
+
 namespace BadgeOS
 {
 	InputDebugScreen::InputDebugScreen() :
@@ -16,6 +18,9 @@ namespace BadgeOS
 
 	void InputDebugScreen::handleInputEvent(const Input::Event& event)
 	{
-		Serial.printf("Received input event: %x, %x, %lx\r\n", (uint32_t)event.device, (uint32_t)event.action, event.timestamp);
+		SERIAL_PRINTF("Received input event %s->%s @ %lu\r\n",
+					  Input::deviceName(event.device),
+					  Input::actionName(event.action),
+					  event.timestamp);
 	}
 }
