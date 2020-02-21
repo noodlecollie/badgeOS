@@ -33,7 +33,9 @@ namespace BadgeOS
 				delay(1000 / ASSERT_LED_ITERATIONS_PER_SEC);
 			}
 
+#ifndef DEBUG
 			HeltecESP32WifiKit32::reset();
+#endif
 		}
 	}
 }

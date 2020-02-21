@@ -29,5 +29,19 @@ void loop()
 	InputInterrupts::update();
 	InputEventSystem::staticInstance().update();
 
+	Screen::UpdateResponse updateResponse = ScreenContainer::staticInstance().update(millis());
+
+	if ( updateResponse != Screen::UpdateResponse::NoRender )
+	{
+		if ( updateResponse == Screen::UpdateResponse::ClearAndRender )
+		{
+			Heltec.display->clear();
+		}
+
+		ScreenContainer::staticInstance().render();
+
+		Heltec.display->display();
+	}
+
 	Alarm.delay(1000/25);
 }

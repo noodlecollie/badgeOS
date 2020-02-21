@@ -58,4 +58,24 @@ namespace BadgeOS
 
 		m_CurrentScreen->handleInputEvent(event);
 	}
+
+	Screen::UpdateResponse ScreenContainer::update(TimevalMs frameTime)
+	{
+		if ( !m_CurrentScreen )
+		{
+			return Screen::UpdateResponse::NoRender;
+		}
+
+		return m_CurrentScreen->update(frameTime);
+	}
+
+	void ScreenContainer::render()
+	{
+		if ( !m_CurrentScreen )
+		{
+			return;
+		}
+
+		m_CurrentScreen->render();
+	}
 }
