@@ -39,11 +39,6 @@ namespace BadgeOS
 
 		void initialise()
 		{
-			pinMode(KEY_BUILTIN, INPUT_PULLUP);
-
-			// Force the button to start low, just in case.
-			digitalWrite(KEY_BUILTIN, LOW);
-
 			attachInterrupt(digitalPinToInterrupt(KEY_BUILTIN), buttonPrgISR, CHANGE);
 		}
 
