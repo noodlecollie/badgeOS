@@ -1,7 +1,5 @@
 #pragma once
 
-#include "heltec.h"
-
 namespace BadgeOS
 {
 	void assertFunc(bool condition, const char* conditionStr, const char* desc, const char* file, int line);

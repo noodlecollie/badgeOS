@@ -1,12 +1,14 @@
 #include <Arduino.h>
 #include "Assert.h"
+#include "heltec.h"
 #include "../Board/HeltecESP32WifiKit32/Board.h"
+#include "../BuildAutoGen/Config.h"
 
 #define ASSERT_LED_ITERATIONS_PER_FLASH 2
 #define ASSERT_LED_FLASHES_PER_SEC 8
 #define ASSERT_LED_ITERATIONS_PER_SEC (ASSERT_LED_ITERATIONS_PER_FLASH * ASSERT_LED_FLASHES_PER_SEC)
 
-#ifdef DEBUG
+#if IS_DEBUG()
 // Flash indefinitely
 #define ASSERT_LED_FLASH_COND(iteration) true
 #else
@@ -33,7 +35,7 @@ namespace BadgeOS
 				delay(1000 / ASSERT_LED_ITERATIONS_PER_SEC);
 			}
 
-#ifndef DEBUG
+#if !IS_DEBUG()
 			HeltecESP32WifiKit32::reset();
 #endif
 		}

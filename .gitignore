@@ -1,3 +1,6 @@
 .vscode
 *.bin
 *.elf
+/build-config.json
+build
+src/BuildAutoGen
