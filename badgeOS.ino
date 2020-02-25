@@ -5,12 +5,16 @@
 #include "src/Board/HeltecESP32WifiKit32/Board.h"
 #include "src/UI/ScreenContainer.h"
 #include "src/UI/ScreenDefs.h"
+#include "src/Partitions/PartitionDump.h"
 
 void setup()
 {
 	using namespace BadgeOS;
 
 	HeltecESP32WifiKit32::initialiseHardware();
+
+	PartitionDump::dumpPartitionInfo();
+
 	InputInterrupts::initialise();
 	Screen::initialiseScreens();
 

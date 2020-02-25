@@ -31,6 +31,9 @@ def parseArgs():
 						default=ALLOWED_BUILD_TYPES[0],
 						help="Configuration in which to build. Valid values are: " + ", ".join(ALLOWED_BUILD_TYPES))
 
+	parser.add_argument("--port",
+						help="Port identifier to use for uploading compiled files.")
+
 	parser.add_argument("cmds",
 						nargs="*",
 						help="Commands to execute. Valid values are: " + ", ".join(ALLOWED_ACTIONS))
@@ -115,7 +118,11 @@ def compile():
 
 	runProcess(args)
 
-def upload():
+def upload(port):
+	if port is None:
+		print("Upload port was not provided - specify using '--port'.", file=sys.stderr)
+		sys.exit(1)
+
 	args = \
 	[
 		currentBuildConfig["arduinoCliPath"],
@@ -123,6 +130,8 @@ def upload():
 		"-t",
 		"--fqbn",
 		currentBuildConfig["fqbn"],
+		"--port",
+		port,
 		SCRIPT_DIR
 	]
 
@@ -187,7 +196,7 @@ def main():
 		if command == "compile":
 			compile()
 		elif command == "upload":
-			upload()
+			upload(args.port)
 		elif command == "clean":
 			initBuildDir(True)
 
